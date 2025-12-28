@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Reported Waste</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<nav>
+<a href="index.html">Home</a>
+<a href="about.html">About</a>
+<a href="report.html">Report</a>
+<a href="reported.html">Reports</a>
+<a href="contact.html">Contact</a>
+</nav>
+
+<h2>Reported Waste</h2>
+
+<table id="table">
+<tr>
+<th>Type</th>
+<th>Qty</th>
+<th>City</th>
+<th>State</th>
+<th>District</th>
+</tr>
+</table>
+
+<script>
+fetch("/api/reports")
+.then(r=>r.json())
+.then(data=>{
+  const table=document.getElementById("table");
+  data.forEach(d=>{
+    table.innerHTML+=`
+    <tr>
+      <td>${d.waste}</td>
+      <td>${d.quantity}</td>
+      <td>${d.city}</td>
+      <td>${d.state}</td>
+      <td>${d.district}</td>
+    </tr>`;
+  });
+});
+</script>
+
+</body>
+</html>

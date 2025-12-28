@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<h2>Report Waste</h2>
+
+<form onsubmit="submitWaste(event)">
+<input id="waste" placeholder="Waste Type" required>
+<input id="qty" type="number" placeholder="Quantity" required>
+<input id="city" placeholder="City" required>
+<input id="state" placeholder="State" required>
+<input id="district" placeholder="District" required>
+<input id="location" placeholder="Current Location (Optional)">
+<button type="submit">Submit</button>
+</form>
+
+<div id="popup" class="popup">
+  <div class="popup-content">
+    <p id="popupText"></p>
+    <button onclick="closePopup()">OK</button>
+  </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
