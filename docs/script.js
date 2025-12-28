@@ -1,3 +1,6 @@
+const API_BASE = "https://environment-aa0f.onrender.com";
+
+// Submit waste report
 async function submitWaste(e) {
   e.preventDefault();
 
@@ -10,7 +13,7 @@ async function submitWaste(e) {
     location: location.value
   };
 
-  const res = await fetch("http://localhost:3000/api/report", {
+  const res = await fetch(`${API_BASE}/api/report`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(data)
@@ -21,11 +24,14 @@ async function submitWaste(e) {
   e.target.reset();
 }
 
+// Load reports
 async function loadReports() {
-  const res = await fetch("http://localhost:3000/api/reports");
+  const res = await fetch(`${API_BASE}/api/reports`);
   const data = await res.json();
 
   const table = document.getElementById("reportTable");
+  table.innerHTML = ""; // clear old rows
+
   data.forEach(r => {
     table.innerHTML += `
       <tr>
@@ -39,13 +45,20 @@ async function loadReports() {
   });
 }
 
+// Contact message
 async function sendMessage(e) {
   e.preventDefault();
-  await fetch("http://localhost:3000/api/contact", { method: "POST" });
+
+  await fetch(`${API_BASE}/api/contact`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" }
+  });
+
   showPopup("Message Sent Successfully");
   e.target.reset();
 }
 
+// Popup helpers
 function showPopup(msg) {
   document.getElementById("popupText").innerText = msg;
   document.getElementById("popup").style.display = "flex";
